@@ -23,22 +23,22 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/tours-simple.json`, 'utf-8')
 );
 
-// IMPORT DATA INTO DB
+//Import Data in DB
 const importData = async () => {
   try {
     await Tour.create(tours);
-    console.log('Data successfully loaded!');
+    console.log('Data Loaded!');
   } catch (err) {
     console.log(err);
   }
   process.exit();
 };
 
-// DELETE ALL DATA FROM DB
+//Delete All Data from DB
 const deleteData = async () => {
   try {
     await Tour.deleteMany();
-    console.log('Data successfully deleted!');
+    console.log('Data deleted!');
   } catch (err) {
     console.log(err);
   }
@@ -50,3 +50,5 @@ if (process.argv[2] === '--import') {
 } else if (process.argv[2] === '--delete') {
   deleteData();
 }
+
+console.log(process.argv);
