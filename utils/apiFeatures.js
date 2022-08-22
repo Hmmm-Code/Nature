@@ -3,29 +3,28 @@ class APIFeatures {
     this.query = query;
     this.queryString = queryString;
   }
-
   filter() {
+    //1A) Filtering
     const queryObj = { ...this.queryString };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
-    excludedFields.forEach(el => delete queryObj[el]);
+    excludedFields.forEach(field => delete queryObj[field]);
 
-    // 1B) Advanced filtering
+    // 1B) Advance Filtering
     let queryStr = JSON.stringify(queryObj);
+    // { difficulty: 'easy',duration: {$gte: 5}}
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
 
     this.query = this.query.find(JSON.parse(queryStr));
-
     return this;
   }
-
   sort() {
     if (this.queryString.sort) {
       const sortBy = this.queryString.sort.split(',').join(' ');
       this.query = this.query.sort(sortBy);
+      // sort('price ratingsAverage')
     } else {
       this.query = this.query.sort('-createdAt');
     }
-
     return this;
   }
 
@@ -36,7 +35,6 @@ class APIFeatures {
     } else {
       this.query = this.query.select('-__v');
     }
-
     return this;
   }
 
