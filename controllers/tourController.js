@@ -28,7 +28,7 @@ exports.getAllTours = async (req, res) => {
     // SEND RESPONSE
     res.status(200).json({
       status: 'success',
-      // results: tours.lenght(),
+      results: tours.length,
       data: {
         tours
       }
@@ -47,6 +47,7 @@ exports.getTour = async (req, res) => {
 
     res.status(200).json({
       status: 'sucess',
+
       data: {
         tour
       }
@@ -88,6 +89,7 @@ exports.updateTour = async (req, res) => {
     });
     res.status(201).json({
       status: 'success',
+
       data: {
         tour
       }
@@ -105,6 +107,7 @@ exports.deleteTour = async (req, res) => {
     await Tour.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: 'sucess',
+
       data: null
     });
   } catch (err) {
@@ -141,6 +144,7 @@ exports.getTourStats = async (req, res) => {
     ]);
     res.status(200).json({
       status: 'success',
+      results: stats.length,
       data: {
         stats
       }
@@ -196,6 +200,7 @@ exports.getMonthlyPlan = async (req, res) => {
 
     res.status(200).json({
       status: 'success',
+
       data: {
         plan
       }
